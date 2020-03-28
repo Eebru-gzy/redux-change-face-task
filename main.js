@@ -9,51 +9,47 @@ let confusedFace = document.getElementById('confused');
 const happyAction = emoji => {
   return {
     type: 'HAPPY_FACE',
-    payload: {
-      face: emoji
-    }
+    face: emoji
   }
 }
 
 const sadAction = emoji => {
  return {
   type: "SAD_FACE",
-  payload: {
-   face: emoji
-  }
+  face: emoji
  };
 };
 
 const angryAction = emoji => {
  return {
   type: "ANGRY_FACE",
-  payload: {
-   face: emoji
-  }
+  face: emoji
  };
 };
 
 const confusedAction = emoji => {
  return {
   type: "CONFUSED_FACE",
-  payload: {
-   face: emoji
-  }
+  face: emoji
  };
 };
 
 //REDUCER
 
-const reducer = (defaultFace = [], action) => {
+const initialState = {
+  face: '(__)'
+};
+
+const reducer = (state = initialState, action) => {
   if (action.type === 'HAPPY_FACE') {
-    return [...defaultFace, action.payload.face];
+    return { ...state, face: action.face };
   } else if (action.type === "SAD_FACE") {
-    return [...defaultFace, action.payload.face];
+    return { ...state, face: action.face };
   } else if (action.type === "ANGRY_FACE") {
-    return [...defaultFace, action.payload.face];
+    return { ...state, face: action.face };
   } else if (action.type === "CONFUSED_FACE") {
-    return [...defaultFace, action.payload.face];
-  } return defaultFace;
+    return { ...state, face: action.face };
+  } return state;
 }
 
 
@@ -62,20 +58,20 @@ const { createStore } = Redux;
 const store = createStore(reducer);
 
 
+
 //eventlisteners functions
 function happyFn() {
- return  store.dispatch(happyAction("¯_(ツ)_/¯"))
+  return  store.dispatch(happyAction("¯_(ツ)_/¯"))
 }
 function sadFn() {
- return store.dispatch(sadAction("《〠_〠》"));
+  return store.dispatch(sadAction("《〠_〠》"));
 }
 function angryFn() {
- return store.dispatch(angryAction("(◡‿◡✿)"));
+  return store.dispatch(angryAction("(◡‿◡✿)"));
 }
 function confusedFn() {
- return store.dispatch(confusedAction("(｡:hearts:‿:hearts:｡)"));
+  return store.dispatch(confusedAction("(｡:hearts:‿:hearts:｡)"));
 }
-
 
 //event listener
 happyFace.addEventListener('click', happyFn);
@@ -84,41 +80,4 @@ angryFace.addEventListener('click', angryFn);
 confusedFace.addEventListener('click', confusedFn);
 
 
-
-store.subscribe(()=> (face.textContent = store.getState()))
-
-// console.log(store.getState())
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const sadReducer = (defaultFace = null, action) => {
-//  if (action.type === "SAD_FACE") {
-//   return defaultFace === action.payload.face;
-//  }
-// };
-
-// const angryReducer = (defaultFace = null, action) => {
-//  if (action.type === "ANGRY_FACE") {
-//   return defaultFace === action.payload.face;
-//  }
-// };
-
-// const confusedReducer = (defaultFace = null, action) => {
-//  if (action.type === "CONFUSED_FACE") {
-//   return defaultFace === action.payload.face;
-//  }
-// };
+store.subscribe(() => (face.innerHTML = store.getState().face));

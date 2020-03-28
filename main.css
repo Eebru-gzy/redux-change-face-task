@@ -1,8 +1,39 @@
+
 #faceholder {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height:70vh;
+    width: 100vw;
   }
-  
-  .buttons {
-    display: block;
-    margin: 10px auto;
-  }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #ccc;
+    width: 400px;
+    height: 300px;
+}
+
+#face {
+  margin-bottom: 80px;
+}
+
+.buttons {
+  display: flex;
+  margin: 10px auto;
+  justify-content: space-evenly;
+}
+
+button {
+  border: none;
+  padding: 10px 10px;
+  margin: 0 5px;
+  background-color: rgb(197, 106, 219);
+  color: #fff;
+  border-radius: 4px;
+  outline: none;
+}
